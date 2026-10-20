@@ -15,21 +15,17 @@ curl -Ls https://sh.jbang.dev | bash -s - app setup
 ## First script
 
 ```bash
+jbang init minimal.java
+chmod +x minimal.java
 vim minimal.java
+jbang minimal.java
 ```
-
-```java
-void main(String[] args) {
-  var greeting = (args.length > 0 ? args[0] : "world");
-  IO.println("Hello "+greeting+"!");
-}
-```
-
 
 ## First template based script
 
 ```bash
 jbang init --template=cli hello.java
+vim hello.java
 chmod +x hello.java
 ./hello.java
 ```
@@ -39,9 +35,8 @@ chmod +x hello.java
 ```bash
 jbang template list
 jbang init --template=qcli quarkuscli.java
+vim quarkuscli.java
 jbang quarkuscli.java jo
-
-
 ```
 
 
