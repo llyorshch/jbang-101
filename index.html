@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JBang 101</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="deck">
+
+    <section class="slide title">
+      <h1>JBang 101</h1>
+      <p class="subtitle">Java scripting, without the ceremony</p>
+    </section>
+
+    <section class="slide">
+      <h2>Agenda</h2>
+      <ol>
+        <li>Setting up the demo environment</li>
+        <li>Your first script</li>
+        <li>Template-based scripts</li>
+        <li>Q&amp;A</li>
+      </ol>
+    </section>
+
+    <section class="slide">
+      <h2>Demo environment</h2>
+      <pre><code>sudo docker run -it --name jbang-101 -h jbang-101 debian
+apt update &amp;&amp; apt -y install curl vim
+export JBANG_DEFAULT_JAVA_VERSION=25
+curl -Ls https://sh.jbang.dev | bash -s - app setup
+. .bashrc</code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>First script</h2>
+      <pre><code>jbang init minimal.java
+chmod +x minimal.java
+vim minimal.java
+jbang minimal.java</code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Template-based script</h2>
+      <pre><code>jbang init --template=cli hello.java
+vim hello.java
+chmod +x hello.java
+./hello.java</code></pre>
+    </section>
+
+    <section class="slide title">
+      <h1>Thanks!</h1>
+      <p class="subtitle">Questions?</p>
+    </section>
+
+  </main>
+
+  <nav class="controls" aria-label="Slide navigation">
+    <button id="prev" aria-label="Previous slide">&#8592;</button>
+    <span id="counter" aria-live="polite"></span>
+    <button id="next" aria-label="Next slide">&#8594;</button>
+  </nav>
+
+  <script src="deck.js"></script>
+</body>
+</html>
