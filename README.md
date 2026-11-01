@@ -40,3 +40,9 @@ jbang quarkuscli.java jo
 ```
 
 
+
+## Slides
+
+The presentation lives in [`deck/`](deck/) and is published to GitHub Pages at
+https://llyorshch.github.io/jbang-101/ by the `Publish deck` workflow on every push to `master`.
+Open `deck/index.html` locally to preview. Navigate with arrow keys, space, or swipe.
