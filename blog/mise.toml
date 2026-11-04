@@ -1,0 +1,3 @@
+[env]
+# Default base_url for blog.hurl. Override with: hurl --variable base_url=...
+HURL_VARIABLE_base_url = "http://localhost:7070"
