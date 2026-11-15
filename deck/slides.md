@@ -9,22 +9,29 @@ transition: slide-left
 mdc: true
 ---
 
-# JBang 101
+# JBang
 
-Java scripting, without the ceremony
-
----
-
-# Agenda
-
-1. Setting up the demo environment
-2. Your first script
-3. Template-based scripts
-4. Q&A
+Java, without the ceremony
 
 ---
 
-# Demo environment
+![Let's cut to the chase](./img/lets_cut_to_the_chase.jpg)
+
+---
+
+# Main features
+
+1. Zero-Configuration JVM-based execution (Java,Kotlin,Groovy)
+2. Automatic JDK Bootstraping
+3. Dependency resolution + Multi-file and Resource inclusion (maven without xml)
+4. ~~Full~~ IDE integration (more on this later)
+5. Built-in project template support + Project export in multiple formats
+6. Jar packaging and Native image generation (with GraalVM)
+7. Remote execution, Catalogs and local CLI installation
+
+---
+
+# Demo
 
 ```bash
 sudo docker run -it --name jbang-101 -h jbang-101 debian
@@ -57,10 +64,11 @@ chmod +x hello.java
 ```
 
 ---
+
 layout: center
 class: text-center
 ---
 
-# Thanks!
+# Thanks
 
 Questions?
