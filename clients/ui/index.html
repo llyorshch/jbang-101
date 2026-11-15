@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qv0rpYNuQxT3hF4vghj3keGkhmossdsnmIiZcmEPqnw='; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+    <meta name="referrer" content="no-referrer">
+    <title>Onboarding Console</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./styles.css">
+    <!-- The only inline script. If you edit it, recompute the sha256 in the CSP above. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "./vendor/react.js",
+          "react-dom/client": "./vendor/react-dom-client.js",
+          "htm": "./vendor/htm.js"
+        }
+      }
+    </script>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <noscript>This console needs JavaScript enabled.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

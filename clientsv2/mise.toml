@@ -1,0 +1,67 @@
+[env]
+# Default base_url for clients.hurl. Override with: hurl --variable base_url=...
+HURL_VARIABLE_base_url = "http://localhost:8080"
+
+[tasks."test:arch"]
+description = "Check the hexagonal architecture rules with ArchUnit"
+run = "./ArchitectureCheck.java"
+
+[tasks."test:e2e"]
+description = "Start the app on a throwaway database and port, run clients.hurl against it, then stop it"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+E2E_PORT="${E2E_PORT:-18080}"
+work=$(mktemp -d)
+log="$work/server.log"
+pid=""
+cleanup() {
+  # JBang starts the JVM as a child process, so stopping $pid alone would leave it running.
+  # Stop the launcher's children too, then anything still listening on the test port.
+  if [ -n "$pid" ]; then
+    pkill -TERM -P "$pid" 2>/dev/null || true
+    kill "$pid" 2>/dev/null || true
+  fi
+  for _ in $(seq 1 20); do
+    lsof -t -iTCP:"$E2E_PORT" -sTCP:LISTEN >/dev/null 2>&1 || break
+    lsof -t -iTCP:"$E2E_PORT" -sTCP:LISTEN | xargs kill 2>/dev/null || true
+    sleep 0.5
+  done
+  wait "$pid" 2>/dev/null || true
+  rm -rf "$work"
+}
+trap cleanup EXIT
+
+if lsof -nP -iTCP:"$E2E_PORT" -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "error: port $E2E_PORT is already in use (set E2E_PORT to another port)" >&2
+  exit 1
+fi
+
+echo "Starting the app on 127.0.0.1:$E2E_PORT with a throwaway database..."
+PORT="$E2E_PORT" CLIENTS_DB="$work/db" ./ClientsApp.java >"$log" 2>&1 &
+pid=$!
+
+for _ in $(seq 1 180); do
+  if curl -fsS -o /dev/null "http://127.0.0.1:$E2E_PORT/api/clients"; then
+    ready=1
+    break
+  fi
+  if ! kill -0 "$pid" 2>/dev/null; then
+    echo "error: the app exited before it was ready. Last log lines:" >&2
+    tail -40 "$log" >&2
+    exit 1
+  fi
+  sleep 1
+done
+if [ -z "${ready:-}" ]; then
+  echo "error: the app was not ready after 180s. Last log lines:" >&2
+  tail -40 "$log" >&2
+  exit 1
+fi
+
+hurl --test --variable base_url="http://localhost:$E2E_PORT" clients.hurl
+'''
+
+[tasks.test]
+description = "Run the architecture check and the end-to-end tests"
+depends = ["test:arch", "test:e2e"]

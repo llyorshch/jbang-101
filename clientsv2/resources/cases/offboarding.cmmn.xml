@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL"
+             xmlns:flowable="http://flowable.org/cmmn"
+             xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI"
+             xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+             xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI"
+             targetNamespace="http://flywire.com/clients/cases">
+
+  <case id="offboarding" name="Client offboarding">
+    <casePlanModel id="offboardingPlanModel" name="Client offboarding" flowable:autoComplete="true">
+
+      <planItem id="openedItem" name="Offboarding opened" definitionRef="opened"/>
+      <planItem id="checksOngoingItem" name="Checks ongoing" definitionRef="checksOngoing">
+        <entryCriterion id="checksOngoingEntryCriterion" sentryRef="onStartChecks"/>
+      </planItem>
+      <planItem id="finishedItem" name="Offboarding finished" definitionRef="finished">
+        <entryCriterion id="finishedEntryCriterion" sentryRef="onCompleteChecks"/>
+      </planItem>
+
+      <sentry id="onStartChecks">
+        <planItemOnPart id="onStartChecksPart" sourceRef="startChecksItem">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="onCompleteChecks">
+        <planItemOnPart id="onCompleteChecksPart" sourceRef="completeChecksItem">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+
+      <stage id="opened" name="Offboarding opened">
+        <planItem id="startChecksItem" name="Start checks" definitionRef="startChecks"/>
+        <humanTask id="startChecks" name="Start checks"/>
+      </stage>
+
+      <stage id="checksOngoing" name="Checks ongoing">
+        <planItem id="completeChecksItem" name="Complete checks" definitionRef="completeChecks"/>
+        <humanTask id="completeChecks" name="Complete checks"/>
+      </stage>
+
+      <stage id="finished" name="Offboarding finished" flowable:autoComplete="true">
+        <planItem id="offboardClientItem" name="Mark client offboarded" definitionRef="offboardClient"/>
+        <planItem id="offboardedItem" name="Client offboarded" definitionRef="offboarded">
+          <entryCriterion id="offboardedEntryCriterion" sentryRef="onClientOffboarded"/>
+        </planItem>
+
+        <sentry id="onClientOffboarded">
+          <planItemOnPart id="onClientOffboardedPart" sourceRef="offboardClientItem">
+            <standardEvent>complete</standardEvent>
+          </planItemOnPart>
+        </sentry>
+
+        <task id="offboardClient" name="Mark client offboarded" isBlocking="false"
+              flowable:type="java"
+              flowable:expression="${clientLifecycle.offboardingFinished(caseInstance)}"/>
+        <milestone id="offboarded" name="Client offboarded"/>
+      </stage>
+    </casePlanModel>
+  </case>
+
+
+
+
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_offboarding">
+      <cmmndi:CMMNShape id="CMMNShape_offboardingPlanModel" cmmnElementRef="offboardingPlanModel">
+        <dc:Bounds x="5" y="5" width="900" height="270"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_openedItem" cmmnElementRef="openedItem">
+        <dc:Bounds x="40" y="45" width="220" height="210"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_startChecksItem" cmmnElementRef="startChecksItem">
+        <dc:Bounds x="70" y="50" width="160" height="60"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_checksOngoingItem" cmmnElementRef="checksOngoingItem">
+        <dc:Bounds x="340" y="45" width="220" height="210"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_checksOngoingEntryCriterion" cmmnElementRef="checksOngoingEntryCriterion">
+        <dc:Bounds x="331" y="66" width="18" height="28"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_completeChecksItem" cmmnElementRef="completeChecksItem">
+        <dc:Bounds x="370" y="50" width="160" height="60"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_finishedItem" cmmnElementRef="finishedItem">
+        <dc:Bounds x="640" y="45" width="240" height="210"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_finishedEntryCriterion" cmmnElementRef="finishedEntryCriterion">
+        <dc:Bounds x="631" y="66" width="18" height="28"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_offboardClientItem" cmmnElementRef="offboardClientItem">
+        <dc:Bounds x="680" y="50" width="160" height="60"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_offboardedItem" cmmnElementRef="offboardedItem">
+        <dc:Bounds x="680" y="170" width="160" height="42"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_offboardedEntryCriterion" cmmnElementRef="offboardedEntryCriterion">
+        <dc:Bounds x="751" y="156" width="18" height="28"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="CMMNEdge_startToChecks" cmmnElementRef="startChecksItem" targetCMMNElementRef="checksOngoingEntryCriterion">
+        <di:waypoint x="230" y="80"/>
+        <di:waypoint x="331" y="80"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_checksToFinished" cmmnElementRef="completeChecksItem" targetCMMNElementRef="finishedEntryCriterion">
+        <di:waypoint x="530" y="80"/>
+        <di:waypoint x="631" y="80"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_offboardToMilestone" cmmnElementRef="offboardClientItem" targetCMMNElementRef="offboardedEntryCriterion">
+        <di:waypoint x="760" y="110"/>
+        <di:waypoint x="760" y="156"/>
+        <cmmndi:CMMNLabel/>
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</definitions>
