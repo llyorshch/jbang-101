@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 420" width="360" height="420">
+  <style>
+    .hop  { animation: hop 1s ease-in-out infinite; }
+    .wave { transform-origin: 215px 240px; animation: wave 0.45s ease-in-out infinite alternate; }
+    .bulb { animation: glow 1s ease-in-out infinite alternate; }
+    .shadow { transform-origin: 150px 405px; animation: shrink 1s ease-in-out infinite; }
+    @keyframes hop    { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes wave   { from { transform: rotate(-18deg); } to { transform: rotate(22deg); } }
+    @keyframes glow   { from { fill: #ffd54a; } to { fill: #fff3b0; } }
+    @keyframes shrink { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.85); } }
+    .ol { stroke: #1d1b3a; stroke-width: 6; stroke-linejoin: round; }
+  </style>
+
+  <ellipse class="shadow" cx="150" cy="405" rx="90" ry="12" fill="#000" opacity="0.2"/>
+
+  <g class="hop">
+    <!-- legs -->
+    <rect class="ol" x="105" y="325" width="36" height="58" rx="14" fill="#e6e4fb"/>
+    <rect class="ol" x="159" y="325" width="36" height="58" rx="14" fill="#e6e4fb"/>
+    <ellipse class="ol" cx="120" cy="388" rx="28" ry="14" fill="#b9b4f0"/>
+    <ellipse class="ol" cx="180" cy="388" rx="28" ry="14" fill="#b9b4f0"/>
+
+    <!-- relaxed arm -->
+    <path d="M88 245 Q55 270 58 315" fill="none" stroke="#1d1b3a" stroke-width="38" stroke-linecap="round"/>
+    <path d="M88 245 Q55 270 58 315" fill="none" stroke="#f4f3ff" stroke-width="26" stroke-linecap="round"/>
+    <circle class="ol" cx="58" cy="322" r="20" fill="#f4f3ff"/>
+
+    <!-- body -->
+    <rect class="ol" x="80" y="212" width="140" height="130" rx="45" fill="#f4f3ff"/>
+    <rect x="118" y="248" width="64" height="54" rx="12" fill="#e8eeff" stroke="#2b6de8" stroke-width="5"/>
+    <text x="150" y="287" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="bold" font-size="30" fill="#2b6de8">AI</text>
+
+    <!-- antenna -->
+    <line x1="150" y1="64" x2="150" y2="32" stroke="#1d1b3a" stroke-width="6"/>
+    <circle class="ol bulb" cx="150" cy="24" r="13" fill="#ffd54a"/>
+
+    <!-- head -->
+    <ellipse class="ol" cx="54" cy="142" rx="20" ry="32" fill="#b9b4f0"/>
+    <ellipse class="ol" cx="246" cy="142" rx="20" ry="32" fill="#b9b4f0"/>
+    <rect class="ol" x="55" y="60" width="190" height="160" rx="70" fill="#f4f3ff"/>
+    <rect x="76" y="88" width="148" height="104" rx="46" fill="#141631"/>
+    <path d="M96 104 q14 -10 32 -10" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+    <path d="M106 142 q17 -24 34 0 M160 142 q17 -24 34 0" fill="none" stroke="#5ff2ff" stroke-width="16" stroke-linecap="round" opacity="0.25"/>
+    <path d="M106 142 q17 -24 34 0 M160 142 q17 -24 34 0" fill="none" stroke="#5ff2ff" stroke-width="9" stroke-linecap="round"/>
+    <path d="M128 160 q22 20 44 0" fill="none" stroke="#5ff2ff" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="96" cy="166" r="8" fill="#ff7eb6" opacity="0.55"/>
+    <circle cx="204" cy="166" r="8" fill="#ff7eb6" opacity="0.55"/>
+    <!-- waving arm -->
+    <g class="wave">
+      <path d="M212 245 Q285 230 292 150" fill="none" stroke="#1d1b3a" stroke-width="38" stroke-linecap="round"/>
+      <path d="M212 245 Q285 230 292 150" fill="none" stroke="#f4f3ff" stroke-width="26" stroke-linecap="round"/>
+      <ellipse class="ol" cx="294" cy="124" rx="25" ry="28" fill="#f4f3ff"/>
+      <path d="M276 132 q-16 -4 -14 -18" fill="none" stroke="#1d1b3a" stroke-width="6" stroke-linecap="round"/>
+      <path d="M287 100 v-12 M298 98 v-14 M309 102 v-10" stroke="#1d1b3a" stroke-width="5" stroke-linecap="round"/>
+      <!-- motion lines -->
+      <path d="M332 92 q8 20 0 40 M258 80 q-10 16 -6 34" fill="none" stroke="#ffb347" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+  </g>
+</svg>
