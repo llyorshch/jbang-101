@@ -201,3 +201,15 @@ class: text-center
 >
   Hi humans! 👋 Thanks for listening! 🎉 Questions? ❓
 </div>
+
+<!-- References
+
+- https://blog.marcnuri.com/jbang-introduction
+- https://dev.to/worldlinetech/jbang-the-missing-scripting-tool-of-the-java-ecosystem-3f7d
+- https://dev.to/worldlinetech/jbang-the-missing-scripting-tool-of-the-java-ecosystem-3f7d
+- https://sombriks.com.br/blog/0095-java-small-to-big-with-jbang/?via=dailydev
+[Scripting on the JVM with JBang by Yassine Benabbas](https://youtu.be/3QnwTmHGct8?si=DDX8n5Dyzwse4Rw3)
+[jbang - Unleash the power of Java by Max Rydahl Andersen](https://youtu.be/cpKwBbz1sf0?si=Bvw7LWouYEuV6RtN)
+[JBang.dev is WAY more than just a handy shell for JVM developers!](https://www.youtube.com/live/fBvcUJbCMXo?si=QOXLmU9OzAiaZuEB)
+
+-->
