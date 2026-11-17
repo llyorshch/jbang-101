@@ -1,45 +1,6 @@
-# JBang 101
+# JBang - Java without the ceremony
 
-## Creating a docker container just for the demo
-
-```java
-```
-```bash
-sudo docker run -it --name jbang-101 -h jbang-101 debian
-apt update && apt -y install curl vim
-export JBANG_DEFAULT_JAVA_VERSION=25
-curl -Ls https://sh.jbang.dev | bash -s - app setup
-. .bashrc
-```
-
-## First script
-
-```bash
-jbang init minimal.java
-chmod +x minimal.java
-vim minimal.java
-jbang minimal.java
-```
-
-## First template based script
-
-```bash
-jbang init --template=cli hello.java
-vim hello.java
-chmod +x hello.java
-./hello.java
-```
-
-## Templates
-
-```bash
-jbang template list
-jbang init --template=qcli quarkuscli.java
-vim quarkuscli.java
-jbang quarkuscli.java jo
-```
-
-
+Brief presentation about the present and future of JBang.
 
 ## Slides
 
@@ -53,3 +14,19 @@ npm install
 npm run dev     # live preview at http://localhost:3030
 npm run build   # static build into deck/dist
 ```
+
+## References
+
+### Articles
+
+- [What is JBang? The Complete Guide to Java Scripting](https://blog.marcnuri.com/jbang-introduction) by Marc Nuri
+- [JBang, the missing scripting tool of the Java ecosystem](https://dev.to/worldlinetech/jbang-the-missing-scripting-tool-of-the-java-ecosystem-3f7d) by Yassine Benabbas (DEV Community)
+- [Big things have small beginnings: taking Java from small to big with JBang](https://sombriks.com.br/blog/0095-java-small-to-big-with-jbang/) (Sombriks HQ)
+
+### Videos
+
+| | |
+|---|---|
+| <a href="https://www.youtube.com/watch?v=3QnwTmHGct8"><img src="https://i.ytimg.com/vi/3QnwTmHGct8/hqdefault.jpg" alt="Scripting on the JVM with JBang by Yassine Benabbas" width="320"></a> | **[Scripting on the JVM with JBang by Yassine Benabbas](https://www.youtube.com/watch?v=3QnwTmHGct8)**<br>Devoxx UK |
+| <a href="https://www.youtube.com/watch?v=cpKwBbz1sf0"><img src="https://i.ytimg.com/vi/cpKwBbz1sf0/hqdefault.jpg" alt="jbang - Unleash the power of Java by Max Rydahl Andersen" width="320"></a> | **[jbang - Unleash the power of Java by Max Rydahl Andersen](https://www.youtube.com/watch?v=cpKwBbz1sf0)**<br>Devoxx |
+| <a href="https://www.youtube.com/watch?v=fBvcUJbCMXo"><img src="https://i.ytimg.com/vi/fBvcUJbCMXo/hqdefault.jpg" alt="JBang.dev is WAY more than just a handy shell for JVM developers!" width="320"></a> | **[JBang.dev is WAY more than just a handy shell for JVM developers!](https://www.youtube.com/watch?v=fBvcUJbCMXo)**<br>Coffee + Software: interview with Max Rydahl Andersen |
